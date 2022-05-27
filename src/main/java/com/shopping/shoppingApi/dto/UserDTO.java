@@ -1,17 +1,27 @@
 package com.shopping.shoppingApi.dto;
 
-import java.util.Date;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+
+import org.hibernate.validator.constraints.br.CPF;
 
 import com.shopping.shoppingApi.entitie.User;
 
 public class UserDTO {
-
+	@NotBlank
 	private String name;
+	@NotBlank
+	@CPF
 	private String cpf;
+	@NotBlank
 	private String adress;
+	@NotBlank
+	@Email
 	private String email;
+	@NotBlank
 	private String phone;
-	private Date dateRegister;
+	
 
 	public String getName() {
 		return name;
@@ -51,26 +61,6 @@ public class UserDTO {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	public Date getDateRegister() {
-		return dateRegister;
-	}
-
-	public void setDateRegister(Date dateRegister) {
-		this.dateRegister = dateRegister;
-	}
-
-	public static UserDTO convert(User user) {
-
-		UserDTO userDTO = new UserDTO();
-		userDTO.setName(user.getName());
-		userDTO.setCpf(user.getCpf());
-		userDTO.setAdress(user.getAdress());
-		userDTO.setEmail(user.getEmail());
-		userDTO.setPhone(user.getPhone());
-		userDTO.setDateRegister(user.getDateRegister());
-		return userDTO;
 	}
 
 }

@@ -2,7 +2,10 @@ package com.shopping.shoppingApi.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +25,7 @@ public class UserService {
 		return allUsers.stream().map(UserDTO::convert).collect(Collectors.toList());
 	}
 
-	public UserDTO findById(Long id) {
+	public UserDTO findById(UUID id) {
 		Optional<User> user = userRepository.findById(id);
 
 		if (user.isPresent()) {
@@ -31,13 +34,13 @@ public class UserService {
 		return null;
 	}
 
-	public UserDTO save(UserDTO userDTO) {
-		User user = userRepository.save(User.convert(userDTO));
-		return UserDTO.convert(user);
+	@Transactional
+	public User save(User user) {
+		return userRepository.save(user);
 
 	}
 
-	public void delete(Long id) {
+	public void delete(UUID id) {
 		Optional<User> user = userRepository.findById(id);
 		if (user.isPresent()) {
 			userRepository.delete(user.get());

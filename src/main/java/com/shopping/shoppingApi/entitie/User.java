@@ -1,32 +1,45 @@
 package com.shopping.shoppingApi.entitie;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.shopping.shoppingApi.dto.UserDTO;
 
 @Entity
-public class User {
+@Table(name = "TB_USERS")
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private UUID id;
 
+	@Column(nullable = false, length = 50)
 	private String name;
+	@Column(nullable = false, length = 11)
 	private String cpf;
+	@Column(nullable = false, length = 50)
 	private String adress;
+	@Column(nullable = false, length = 50)
 	private String email;
+	@Column(nullable = false, length = 15)
 	private String phone;
-	private Date dateRegister;
+	@Column(nullable = false)
+	private LocalDateTime dateRegister;
 
 	public User() {
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
@@ -70,24 +83,12 @@ public class User {
 		this.phone = phone;
 	}
 
-	public Date getDateRegister() {
+	public LocalDateTime getDateRegister() {
 		return dateRegister;
 	}
 
-	public void setDateRegister(Date dateRegister) {
+	public void setDateRegister(LocalDateTime dateRegister) {
 		this.dateRegister = dateRegister;
-	}
-
-	public static User convert(UserDTO userDTO) {
-		
-		User user = new User();
-		user.setName(userDTO.getName());
-		user.setCpf(userDTO.getCpf());
-		user.setAdress(userDTO.getAdress());
-		user.setEmail(userDTO.getEmail());
-		user.setPhone(userDTO.getPhone());
-		user.setDateRegister(userDTO.getDateRegister());
-		return user;
 	}
 
 }
