@@ -20,18 +20,16 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public List<UserDTO> getAll() {
-		List<User> allUsers = userRepository.findAll();
-		return allUsers.stream().map(UserDTO::convert).collect(Collectors.toList());
+	public List<User> getAllUsers() {
+		return userRepository.findAll();
 	}
 
-	public UserDTO findById(UUID id) {
-		Optional<User> user = userRepository.findById(id);
+	public boolean existsByCpf(String cpf) {
+		return userRepository.existsByCpf(cpf);
+	}
 
-		if (user.isPresent()) {
-			return UserDTO.convert(user.get());
-		}
-		return null;
+	public boolean existsByEmail(String email) {
+		return userRepository.existsByEmail(email);
 	}
 
 	@Transactional
@@ -40,23 +38,23 @@ public class UserService {
 
 	}
 
-	public void delete(UUID id) {
-		Optional<User> user = userRepository.findById(id);
-		if (user.isPresent()) {
-			userRepository.delete(user.get());
-		}
+	@Transactional
+	public void delete(User user) {
+		userRepository.delete(user);
 	}
 
 	public UserDTO findByCpf(String cpf) {
 		User user = userRepository.findByCpf(cpf);
-		if (user != null) {
-			return UserDTO.convert(user);
-		}
+
 		return null;
 	}
 
 	public List<UserDTO> queryByName(String name) {
 		List<User> users = userRepository.queryByNameLike(name);
-		return users.stream().map(UserDTO::convert).collect(Collectors.toList());
+		return null;
+	}
+
+	public Optional<User> findById(UUID id) {
+		return userRepository.findById(id);
 	}
 }

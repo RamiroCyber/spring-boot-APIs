@@ -10,8 +10,12 @@ import com.shopping.shoppingApi.entitie.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
-
+	
 	User findByCpf(String cpf);
+	
+	boolean existsByCpf(String cpf);
+	
+	boolean existsByEmail(String email);
 
 	List<User> queryByNameLike(String name);
 }
