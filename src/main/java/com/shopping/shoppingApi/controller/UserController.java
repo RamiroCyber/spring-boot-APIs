@@ -10,6 +10,10 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,8 +38,8 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping
-	public ResponseEntity<List<User>> getAllUsers() {
-		return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUsers());
+	public ResponseEntity<Page<User>> getAllUsers(@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.ASC) Pageable pageable) {
+		return ResponseEntity.status(HttpStatus.OK).body(userService.getAllUsers(pageable));
 
 	}
 
@@ -62,7 +66,7 @@ public class UserController {
 	}
 
 	@GetMapping("/search")
-	public ResponseEntity<List<UserDTO>> queryByName(@RequestParam(name = "name", required = true) String name) {
+	public ResponseEntity<List<User>> queryByName(@RequestParam(name = "name", required = true) String name) {
 		return ResponseEntity.ok().body(userService.queryByName(name));
 
 	}

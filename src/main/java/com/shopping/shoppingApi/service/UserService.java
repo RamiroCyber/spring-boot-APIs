@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.shopping.shoppingApi.dto.UserDTO;
@@ -20,8 +22,8 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public List<User> getAllUsers() {
-		return userRepository.findAll();
+	public Page<User> getAllUsers(Pageable pageable) {
+		return userRepository.findAll(pageable);
 	}
 
 	public boolean existsByCpf(String cpf) {
@@ -43,15 +45,12 @@ public class UserService {
 		userRepository.delete(user);
 	}
 
-	public UserDTO findByCpf(String cpf) {
-		User user = userRepository.findByCpf(cpf);
-
-		return null;
+	public User findByCpf(String cpf) {
+		return userRepository.findByCpf(cpf);
 	}
 
-	public List<UserDTO> queryByName(String name) {
-		List<User> users = userRepository.queryByNameLike(name);
-		return null;
+	public List<User> queryByName(String name) {
+		return userRepository.queryByNameLike(name);
 	}
 
 	public Optional<User> findById(UUID id) {
