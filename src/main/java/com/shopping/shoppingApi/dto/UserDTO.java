@@ -3,11 +3,6 @@ package com.shopping.shoppingApi.dto;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-
-import org.hibernate.validator.constraints.br.CPF;
-
-import com.shopping.shoppingApi.entitie.User;
-
 public class UserDTO {
 	@NotBlank
 	private String name;
@@ -20,7 +15,6 @@ public class UserDTO {
 	private String email;
 	@NotBlank
 	private String phone;
-	
 
 	public String getName() {
 		return name;

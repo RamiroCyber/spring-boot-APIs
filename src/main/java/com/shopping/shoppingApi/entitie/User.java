@@ -11,10 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.br.CPF;
-
-import com.shopping.shoppingApi.dto.UserDTO;
-
 @Entity
 @Table(name = "TB_USERS")
 public class User implements Serializable {
