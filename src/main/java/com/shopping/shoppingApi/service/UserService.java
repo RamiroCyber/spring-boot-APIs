@@ -23,16 +23,10 @@ public class UserService {
 		return userRepository.findAll(pageable);
 	}
 
-	public boolean existsByCpf(String cpf) {
-		return userRepository.existsByCpf(cpf);
-	}
-
-	
-
 	@Transactional
 	public User save(User user) {
 		if (userRepository.existsByCpf(user.getCpf())) {
-			return null;
+			return null; //Corrigir retorno
 		}
 		return userRepository.save(user);
 	}

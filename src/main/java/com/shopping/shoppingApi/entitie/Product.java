@@ -23,10 +23,17 @@ public class Product implements Serializable {
 	
 	@Column(nullable = false, length = 50)
 	private String name;
+	@Column(nullable = false, length = 50)
+	private String model;
+	@Column(nullable = false, length = 50)
+	private String manufacturer;
 	@Column(nullable = false)
 	private Float price;
 	@Column(nullable = false, length = 100)
 	private String description;
+	@Column(nullable = false)
+	private Integer amount;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
@@ -47,6 +54,22 @@ public class Product implements Serializable {
 		this.name = name;
 	}
 
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
 	public Float getPrice() {
 		return price;
 	}
@@ -63,6 +86,14 @@ public class Product implements Serializable {
 		this.description = description;
 	}
 
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
 	public Category getCategory() {
 		return category;
 	}
@@ -70,5 +101,9 @@ public class Product implements Serializable {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+
+
+
+
 	
 }

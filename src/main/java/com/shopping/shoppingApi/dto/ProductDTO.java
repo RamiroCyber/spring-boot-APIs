@@ -6,10 +6,16 @@ import javax.validation.constraints.NotNull;
 public class ProductDTO {
 	@NotBlank
 	private String name;
+	@NotBlank
+	private String model;
+	@NotBlank
+	private String manufacturer;
 	@NotNull
 	private Float price;
 	@NotBlank
 	private String description;
+	@NotNull
+	private Integer amount;
 	@NotNull
 	private CategoryDTO category;
 
@@ -19,6 +25,22 @@ public class ProductDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public String getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
 	}
 
 	public Float getPrice() {
@@ -35,6 +57,14 @@ public class ProductDTO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
 	}
 
 	public CategoryDTO getCategory() {
